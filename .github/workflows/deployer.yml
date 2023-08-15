@@ -1,0 +1,30 @@
+name: Cloud Function Deployment
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  dev_deployment:
+    name: Development Deployment
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - id: "auth"
+        uses: google-github-actions/auth@v0
+        with:
+          credentials_json: ${{secrets.GCP_SA_KEY}}
+
+      - id: "deploy"
+        uses: "google-github-actions/deploy-cloud-functions@v1"
+        with:
+          name: json-ingest
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          region: us-central1
+          source_dir: src
+          entry_point: main
+          runtime: python39
+          env_vars: ""
+          event_trigger_type: google.cloud.storage.object.v1.finalized
+          event_trigger_resource: projects/cf-data-analytics/locations/us/triggers/function-1-038849
