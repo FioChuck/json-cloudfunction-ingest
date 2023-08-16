@@ -22,4 +22,4 @@ def hello_gcs(cloud_event):
     print(f"Created: {timeCreated}")
     print(f"Updated: {updated}")
 
-    print("gs://" + bucket + "/" + name)
+    print("gs://" + bucket + "/" + name) # trigger file path
