@@ -19,6 +19,7 @@ jobs:
         with:
           name: code-directory
           path: src
+          gzip: true
 
       - name: "upload src artifact to google cloud storage"
         uses: "google-github-actions/upload-cloud-storage@v1"
