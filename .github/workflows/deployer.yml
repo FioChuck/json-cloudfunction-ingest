@@ -46,11 +46,14 @@ jobs:
       - name: "copy source code directory"
         run: "gsutil cp -r gs://cf-cloud-function-source/src ."
 
+      - name: "cd"
+        run: "cd src"
+
       - name: "list"
         run: "ls"
 
       - name: "zip source code files"
-        run: "zip src.zip ./src/*"
+        run: "zip src.zip *"
 
       - name: "upload source code"
         run: "gsutil cp src.zip gs://cf-cloud-function-source"
