@@ -56,8 +56,8 @@ jobs:
         run: "gsutil cp src/src.zip gs://cf-cloud-function-source"
 
       - name: "deploy cloud function using gcloud"
-        continue-on-error: true
+        continue-on-error: false
         run: "gcloud  functions deploy my_function --region=us-central1 \
-          --runtime=python39 --gen2 --entry-point=hello_gcs \
+          --runtime=python39 --gen2 --entry-point=main \
           --trigger-bucket=cf-json-ingest \
           --source=gs://cf-cloud-function-source/src.zip"
