@@ -43,9 +43,15 @@ jobs:
         with:
           version: ">= 363.0.0"
 
-      - name: "deploy cloud function using gcloud"
+      # - name: "deploy cloud function using gcloud"
+      #   continue-on-error: true
+      #   run: "gcloud  functions deploy my_function --region=us-central1 \
+      #     --runtime=python39 --gen2 --entry-point=hello_gcs \
+      #     --trigger-bucket=cf-json-ingest \
+      #     --source=gs://cf-cloud-function-source/source.zip"
+
+      - name: "zip source code"
         continue-on-error: true
-        run: "gcloud  functions deploy my_function --region=us-central1 \
-          --runtime=python39 --gen2 --entry-point=hello_gcs \
-          --trigger-bucket=cf-json-ingest \
-          --source=gs://cf-cloud-function-source/source.zip"
+        run: "gsutil cp -r gs://cf-cloud-function-source/src . \
+          zip source.zip ./src \
+          gsutil cp source.zip gs://cf-cloud-function-source"
