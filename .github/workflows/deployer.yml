@@ -50,10 +50,10 @@ jobs:
         run: "cd src"
 
       - name: "list"
-        run: "ls"
+        run: "cd src; ls"
 
       - name: "zip source code files"
-        run: "zip src.zip *"
+        run: "cd src; ls; zip src.zip *"
 
       - name: "upload source code"
         run: "gsutil cp src.zip gs://cf-cloud-function-source"
