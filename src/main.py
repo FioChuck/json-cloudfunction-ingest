@@ -1,8 +1,9 @@
 import functions_framework
+from functions import *
 
-# Triggered by a change in a storage bucket
+
 @functions_framework.cloud_event
-def hello_gcs(cloud_event):
+def main(cloud_event):
     data = cloud_event.data
 
     event_id = cloud_event["id"]
@@ -22,4 +23,15 @@ def hello_gcs(cloud_event):
     print(f"Created: {timeCreated}")
     print(f"Updated: {updated}")
 
-    print("gs://" + bucket + "/" + name) # trigger file path
+    gcs_bucket = bucket
+    gcs_file = name
+    table_id = "cf-data-analytics.spark_example.gcf_stream"
+
+    x = read_from_gcs(gcs_bucket,gcs_file)
+
+    print(type(x))
+    print(x)
+
+    write_to_bq(x,table_id)
+
+    delete_blob(gcs_bucket, gcs_file)
