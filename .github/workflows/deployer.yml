@@ -47,9 +47,9 @@ jobs:
         run: "gsutil cp -r gs://cf-cloud-function-source/src ."
 
       - name: "zip source code files"
-        run: "zip source.zip ./src"
+        run: "zip source.zip ./src/*"
 
-      - name: "upload zipped source code"
+      - name: "upload source code"
         run: "gsutil cp source.zip gs://cf-cloud-function-source"
 
       - name: "deploy cloud function using gcloud"
