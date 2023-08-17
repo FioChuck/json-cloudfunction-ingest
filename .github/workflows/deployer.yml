@@ -50,7 +50,7 @@ jobs:
         run: "ls"
 
       - name: "zip source code files"
-        run: "zip source.zip ./src/*"
+        run: "zip src.zip ./src/*"
 
       - name: "upload source code"
         run: "gsutil cp src.zip gs://cf-cloud-function-source"
