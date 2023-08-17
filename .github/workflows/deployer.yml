@@ -51,7 +51,10 @@ jobs:
       #     --source=gs://cf-cloud-function-source/source.zip"
 
       - name: "zip source code"
-        continue-on-error: true
-        run: "gsutil cp -r gs://cf-cloud-function-source/src . \
-          zip source.zip ./src \
-          gsutil cp source.zip gs://cf-cloud-function-source"
+        run: "gsutil cp -r gs://cf-cloud-function-source/src ."
+
+      - name: "zip source code"
+        run: "zip source.zip ./src"
+
+      - name: "zip source code"
+        run: "gsutil cp source.zip gs://cf-cloud-function-source"
